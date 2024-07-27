@@ -1,14 +1,23 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import dotenv from "dotenv"
+import connectDB from "./models/db.js";
+dotenv.config({})
+
+
+
 const app = express()
 
-app.get("/home", (req,res)=>{
-    return res.status(200).json({
-        message: "Welcome to home page from backend",
-        success: true
-    })
-})
+
+// cheaking value provide or not
+// app.get("/home", (req,res)=>{
+//     return res.status(200).json({
+//         message: "Welcome to home page from backend",
+//         success: true
+//     })
+// })
+
 
 // middleware
 app.use(express.json())
@@ -21,8 +30,9 @@ const corsOption = {
 
 app.use(cors(corsOption));
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, ()=>{
+    connectDB()
     console.log(`Server is running on port ${PORT}`);
 })
