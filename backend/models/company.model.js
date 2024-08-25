@@ -3,14 +3,15 @@ import mongoose from "mongoose";
 const companySchema  = new mongoose.Schema({
     name:{
         type:String,
-        required:true
+        required:true,
+        unique:true
     },
     description:{
         type:String,
     },
-    website:[{
+    website:{
         type:String,
-    }],
+    },
     location:{
         type:Number,
     },
@@ -20,18 +21,9 @@ const companySchema  = new mongoose.Schema({
    
     userId:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:"User",
+        ref:'User',
         required:true
-    },
-    created_by:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: true
-    },
-    applications:[{
-        type:mongoose.Schema.Types.ObjectId,
-        ref: "Application",
-    }]
+    }
      
 },{timestamps:true});
 
